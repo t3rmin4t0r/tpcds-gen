@@ -15,13 +15,6 @@ To generate the data-sets, you need to run (say, for scale = 200, parallelism = 
 
 This uses the existing parallelism in the driver.c of TPC-DS without modification and uses it to run the command on multiple machines instead of running in local fork mode.
 
-The command generates multiple files for each map task, resulting in files which looks like
-
-	/tmp/store_sales/200/inventory_1_100.dat-m-00001
-	/tmp/store_sales/200/inventory_2_100.dat-m-00000
-	...
-	/tmp/store_sales/200/store_returns_1_100.dat-m-00001
-	...
-	/tmp/store_sales/200/store_sales_1_100.dat-m-00001
+The command generates multiple files for each map task, resulting in each table having its own subdirectory.
 
 Assumptions made are that all machines in the cluster are OS/arch/lib identical.
