@@ -42,14 +42,17 @@ public class GenTable extends Configured implements Tool {
         options.addOption("p", "parallel", true, "parallel");
         CommandLine line = parser.parse(options, remainingArgs);
 
-        if(!(line.hasOption("scale") && line.hasOption("table") && line.hasOption("dir"))) {
+        if(!(line.hasOption("scale") && line.hasOption("dir"))) {
           HelpFormatter f = new HelpFormatter();
           f.printHelp("GenTable", options);
           return 1;
         }
         
         int scale = Integer.parseInt(line.getOptionValue("scale"));
-        String table = line.getOptionValue("table");
+        String table = "all";
+        if(line.hasOption("table")) {
+          table = line.getOptionValue("table");
+        }
         Path out = new Path(line.getOptionValue("dir"));
 
         int parallel = scale;
@@ -123,7 +126,11 @@ public class GenTable extends Configured implements Tool {
         FileSystem fs = FileSystem.get(getConf());
         FSDataOutputStream out = fs.create(in);
         for(int i = 1; i <= parallel; i++) {
-          out.writeBytes(String.format("./dsdgen -dir $DIR -table %s -force Y -scale %d -parallel %d -child %d\n", table, scale, parallel, i));
+          if(table.equals("all")) {
+            out.writeBytes(String.format("./dsdgen -dir $DIR -force Y -scale %d -parallel %d -child %d\n", scale, parallel, i));
+          } else {
+            out.writeBytes(String.format("./dsdgen -dir $DIR -table %s -force Y -scale %d -parallel %d -child %d\n", table, scale, parallel, i));
+          }
         }
         out.close();
         return in;
