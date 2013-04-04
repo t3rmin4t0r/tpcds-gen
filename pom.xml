@@ -8,11 +8,11 @@
   <modelVersion>4.0.0</modelVersion>
 
   <groupId>org.notmysock.tpcds</groupId>
-  <artifactId>tpcds-mr</artifactId>
+  <artifactId>tpcds-gen</artifactId>
   <version>1.0-SNAPSHOT</version>
   <packaging>jar</packaging>
 
-  <name>tpcds-mr</name>
+  <name>tpcds-gen</name>
   <url>http://maven.apache.org</url>
 
   <dependencies>

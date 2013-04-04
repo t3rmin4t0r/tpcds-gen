@@ -1,7 +1,7 @@
 
-all: target/lib/dsdgen.jar target/tpcds-mr-1.0-SNAPSHOT.jar
+all: target/lib/dsdgen.jar target/tpcds-gen-1.0-SNAPSHOT.jar
 
-target/tpcds-mr-1.0-SNAPSHOT.jar: $(find -name *.java) 
+target/tpcds-gen-1.0-SNAPSHOT.jar: $(find -name *.java) 
 	mvn package
 
 target/tpcds_kit.zip: tpcds_kit.zip
