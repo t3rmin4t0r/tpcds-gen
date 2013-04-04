@@ -185,7 +185,7 @@ public class GenTable extends Configured implements Tool {
         }
 
         File cwd = new File(".");
-        final String suffix = String.format("%s_%s.dat", child, parallel);
+        final String suffix = String.format("_%s_%s.dat", child, parallel);
 
         FilenameFilter tables = new FilenameFilter() {
           public boolean accept(File dir, String name) {
@@ -198,7 +198,7 @@ public class GenTable extends Configured implements Tool {
           String line;
           while ((line = br.readLine()) != null) {
             // process the line.
-            mos.write("text", line, null, f.getName());
+            mos.write("text", line, null, f.getName().replace(suffix,"/data"));
           }
           br.close();
           f.deleteOnExit();
