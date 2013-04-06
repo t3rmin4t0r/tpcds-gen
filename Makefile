@@ -1,7 +1,7 @@
 
 all: target/lib/dsdgen.jar target/tpcds-gen-1.0-SNAPSHOT.jar
 
-target/tpcds-gen-1.0-SNAPSHOT.jar: $(find -name *.java) 
+target/tpcds-gen-1.0-SNAPSHOT.jar: $(shell find -name *.java) 
 	mvn package
 
 target/tpcds_kit.zip: tpcds_kit.zip
@@ -15,7 +15,7 @@ target/lib/dsdgen.jar: target/tools/dsdgen
 	cd target/; mkdir -p lib/; jar cvf lib/dsdgen.jar tools/
 
 target/tools/dsdgen: target/tpcds_kit.zip
-	cd target; unzip tpcds_kit.zip
+	test -d target/tools/ || (cd target; unzip tpcds_kit.zip; cd tools; patch -p0 < ../../tpcds-strcpy.patch)
 	cd target/tools; make clean; make
 
 clean:
