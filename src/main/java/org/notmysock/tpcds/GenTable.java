@@ -61,6 +61,11 @@ public class GenTable extends Configured implements Tool {
           parallel = Integer.parseInt(line.getOptionValue("parallel"));
         }
 
+        if(parallel == 1 || scale == 1) {
+          System.err.println("The MR task does not work for scale=1 or parallel=1");
+          return 1;
+        }
+
         Path in = genInput(table, scale, parallel);
 
         Path dsdgen = copyJar(new File("target/lib/dsdgen.jar"));
