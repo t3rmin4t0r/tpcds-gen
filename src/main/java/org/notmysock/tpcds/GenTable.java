@@ -75,6 +75,8 @@ public class GenTable extends Configured implements Tool {
                     dsuri.getPort(),dsuri.getPath(), 
                     dsuri.getQuery(),"dsdgen");
         Configuration conf = getConf();
+        conf.setInt("mapred.task.timeout",0);
+        conf.setInt("mapreduce.task.timeout",0);
         DistributedCache.addCacheArchive(link, conf);
         Job job = new Job(conf, "GenTable+"+table+"_"+scale);
         job.setJarByClass(getClass());
