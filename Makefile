@@ -16,7 +16,7 @@ target/lib/dsdgen.jar: target/tools/dsdgen
 
 target/tools/dsdgen: target/tpcds_kit.zip
 	test -d target/tools/ || (cd target; unzip tpcds_kit.zip; cd tools; patch -p0 < ../../tpcds-strcpy.patch)
-	cd target/tools; make clean; make
+	cd target/tools; make clean; make dsdgen
 
 clean:
 	mvn clean
